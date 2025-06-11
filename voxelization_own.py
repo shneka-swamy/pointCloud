@@ -9,7 +9,7 @@ def argparser():
     parser = argparse.ArgumentParser("Converting point cloud to voxelization -- own function")
     parser.add_argument('--input_directory', help="Path to the input directory",  default='./soldier/soldier/Ply/')
     parser.add_argument('--verbose', help="verbose mode -- prints a lot of details", action='store_true')
-    parser.add_argument('--width', help="Width of the cube considered for voxelization", default=5, type=int)
+    parser.add_argument('--width', help="Width of the cube considered for voxelization", default=10, type=int)
     return parser.parse_args()
 
 def deter_no_voxels(args, pcd, width):
@@ -55,9 +55,7 @@ def voxelize(args, pcd, width):
             if lowest[int(x_dim), int(y_dim), int(z_dim)] == 0 or lowest[int(x_dim), int(y_dim), int(z_dim)] > distance:
                 colors[int(x_dim), int(y_dim), int(z_dim)] = color
                 lowest[int(x_dim), int(y_dim), int(z_dim)] = distance
-                #print("Entered")
-
-            #print(color)
+                
             count_points[int(x_dim), int(y_dim), int(z_dim)] += 1
 
         voxelarray = count_points > 0

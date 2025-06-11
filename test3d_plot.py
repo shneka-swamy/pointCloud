@@ -1,3 +1,5 @@
+# NOTE: This code is taken directly from matplotlib documentation and this is not a part of the current project.
+
 import matplotlib.pyplot as plt
 import numpy as np
 
