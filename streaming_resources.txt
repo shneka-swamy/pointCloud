@@ -1,0 +1,9 @@
+Please find below the resources for streaming that uses dash
+
+Paper for streaming point cloud:
+VV-DASH: A Framework for Volumetric Video DASH Streaming
+Github implementation for this paper: https://github.com/Rad6/vv-dash
+
+Other useful github implementations:
+https://github.com/google/draco
+https://github.com/dash-industry-forum/dash.js/

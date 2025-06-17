@@ -46,8 +46,8 @@ def voxelize(args, pcd, width):
             point = pcd.points[i]
             color = pcd.point_data['RGB'][i]
             x_dim, y_dim, z_dim = (point - minimum) // width
-            assert x_dim >= 0 and x_dim < voxels['x'], f"Error in x dimension calculation x_dim: {z_dim}, point0: {point[0]}"
-            assert y_dim >= 0 and y_dim < voxels['y'], f"Error in y dimension calculation y_dim: {z_dim}, point1: {point[1]}"
+            assert x_dim >= 0 and x_dim < voxels['x'], f"Error in x dimension calculation x_dim: {x_dim}, point0: {point[0]}"
+            assert y_dim >= 0 and y_dim < voxels['y'], f"Error in y dimension calculation y_dim: {y_dim}, point1: {point[1]}"
             assert z_dim >= 0 and z_dim < voxels['z'], f"Error in z dimension calculation z_dim: {z_dim}, point2: {point[2]}"
 
             x_middle, y_middle, z_middle = (np.array([x_dim, y_dim, z_dim]) + minimum) * width + width // 2
@@ -66,6 +66,13 @@ def voxelize(args, pcd, width):
 
         plt.show()
 
+def render_point_cloud(pcd):
+    ax = plt.figure().add_subplot(projection='3d')
+    colors = pcd.point_data['RGB'].astype(float) / 255.0
+    ax.scatter(pcd.points[:, 2], pcd.points[:, 0], pcd.points[:, 1], c=colors)
+    
+    plt.show()
+
 # NOTE: Here pyvista is used to only read the point cloud data
 def read_point_cloud(args, file):
     pcd = pv.read(file) 
@@ -82,6 +89,7 @@ def main():
     
     for file in files:
         pcd = read_point_cloud(args, file)
+        render_point_cloud(pcd)
         voxelize(args, pcd, args.width)
         break
 
